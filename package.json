@@ -1,0 +1,43 @@
+{
+  "name": "opencode-bharatcode",
+  "version": "0.1.0",
+  "description": "OpenCode plugin for the BharatCode Qwen3.6 A100 endpoint.",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "files": [
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "bharatcode",
+    "qwen",
+    "llama.cpp"
+  ],
+  "author": "Shrey Gupta",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shrey16/opencode-bharatcode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shrey16/opencode-bharatcode/issues"
+  },
+  "homepage": "https://github.com/shrey16/opencode-bharatcode#readme",
+  "peerDependencies": {
+    "@opencode-ai/plugin": "*"
+  },
+  "peerDependenciesMeta": {
+    "@opencode-ai/plugin": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
