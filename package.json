@@ -1,6 +1,6 @@
 {
   "name": "bharatcode",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "OpenCode plugin for the BharatCode Qwen3.6 A100 endpoint.",
   "type": "module",
   "main": "index.js",
@@ -23,12 +23,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shrey16/opencode-bharatcode.git"
+    "url": "git+https://github.com/shrey16/bharatcode.git"
   },
   "bugs": {
-    "url": "https://github.com/shrey16/opencode-bharatcode/issues"
+    "url": "https://github.com/shrey16/bharatcode/issues"
   },
-  "homepage": "https://github.com/shrey16/opencode-bharatcode#readme",
+  "homepage": "https://github.com/shrey16/bharatcode#readme",
   "peerDependencies": {
     "@opencode-ai/plugin": "*"
   },

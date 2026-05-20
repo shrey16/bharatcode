@@ -68,7 +68,8 @@ opencode
 
 ## Local Plugin Fallback
 
-If the npm package is not available yet, install the plugin file directly.
+If the npm package install path is not working on your machine, install the
+plugin file directly.
 
 Linux/macOS:
 
