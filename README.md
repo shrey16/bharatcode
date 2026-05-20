@@ -1,4 +1,4 @@
-# opencode-bharatcode
+# bharatcode
 
 OpenCode plugin for the BharatCode A100 coding model endpoint.
 
@@ -26,7 +26,7 @@ Configure the plugin in `~/.config/opencode/opencode.json`:
 ```json
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["opencode-bharatcode"]
+  "plugin": ["bharatcode"]
 }
 ```
 
@@ -74,7 +74,7 @@ Linux/macOS:
 
 ```bash
 mkdir -p ~/.config/opencode/plugins
-curl -L https://raw.githubusercontent.com/shrey16/opencode-bharatcode/main/index.js \
+curl -L https://raw.githubusercontent.com/shrey16/bharatcode/main/index.js \
   -o ~/.config/opencode/plugins/bharatcode-plugin.js
 ```
 
@@ -83,7 +83,7 @@ Windows PowerShell:
 ```powershell
 New-Item -ItemType Directory -Force "$env:USERPROFILE\.config\opencode\plugins"
 Invoke-WebRequest `
-  -Uri "https://raw.githubusercontent.com/shrey16/opencode-bharatcode/main/index.js" `
+  -Uri "https://raw.githubusercontent.com/shrey16/bharatcode/main/index.js" `
   -OutFile "$env:USERPROFILE\.config\opencode\plugins\bharatcode-plugin.js"
 ```
 
@@ -100,7 +100,7 @@ You can pass options from `opencode.json`:
   "$schema": "https://opencode.ai/config.json",
   "plugin": [
     [
-      "opencode-bharatcode",
+      "bharatcode",
       {
         "apiKey": "{env:BHARATCODE_API_KEY}",
         "steps": 16,

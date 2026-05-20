@@ -1,5 +1,5 @@
 {
-  "name": "opencode-bharatcode",
+  "name": "bharatcode",
   "version": "0.1.0",
   "description": "OpenCode plugin for the BharatCode Qwen3.6 A100 endpoint.",
   "type": "module",
