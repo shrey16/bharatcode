@@ -5,8 +5,9 @@ OpenCode plugin for the BharatCode A100 coding model endpoint.
 This configures OpenCode to use:
 
 - endpoint: `https://bharatcode.kaabil.me/v1`
-- model: `bharatcode:qwen36-35b-q8-256k`
+- model: `bharatcode:qwen36-35b-q6-256k-vision`
 - context window: `256K`
+- image input: enabled
 - reasoning: enabled
 - provider adapter: `@ai-sdk/openai-compatible`
 
@@ -122,6 +123,8 @@ The plugin also reads these environment variables:
 
 - The shared server currently runs one active inference slot.
 - If someone else is using it, your request may queue.
+- The older `bharatcode:qwen36-35b-q8-256k` model id remains accepted for
+  compatibility with earlier plugin installs.
 - First response on a large repository can be slow because the prompt has to be
   prefetched.
 - Follow-up turns in the same session are faster because prompt/KV caching is

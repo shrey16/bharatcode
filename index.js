@@ -1,5 +1,6 @@
 const PROVIDER_ID = "bharatcode"
-const MODEL_ID = "bharatcode:qwen36-35b-q8-256k"
+const MODEL_ID = "bharatcode:qwen36-35b-q6-256k-vision"
+const LEGACY_MODEL_ID = "bharatcode:qwen36-35b-q8-256k"
 const MODEL = `${PROVIDER_ID}/${MODEL_ID}`
 
 function apiKey(options) {
@@ -55,7 +56,17 @@ export const BharatCodePlugin = async (_ctx, options = {}) => {
         },
         models: {
           [MODEL_ID]: {
-            name: "BharatCode Qwen3.6 35B-A3B Q8_0 256K Thinking",
+            name: "BharatCode Qwen3.6 35B-A3B Q6_K 256K Vision Thinking",
+            reasoning: true,
+            temperature: true,
+            tool_call: true,
+            limit: {
+              context: options.context ?? 262144,
+              output: options.output ?? 32768,
+            },
+          },
+          [LEGACY_MODEL_ID]: {
+            name: "BharatCode legacy Q8 model id compatibility alias",
             reasoning: true,
             temperature: true,
             tool_call: true,
