@@ -3,18 +3,26 @@ const MODEL_ID = "bharatcode:qwen36-35b-q6-256k-vision"
 const LEGACY_MODEL_ID = "bharatcode:qwen36-35b-q8-256k"
 const MODEL = `${PROVIDER_ID}/${MODEL_ID}`
 
-function apiKey(options) {
+function explicitApiKey(options) {
   return (
     options?.apiKey ||
     process.env.BHARATCODE_API_KEY ||
     process.env.OPENCODE_BHARATCODE_API_KEY ||
-    ""
+    undefined
   )
 }
 
 export const BharatCodePlugin = async (_ctx, options = {}) => {
   return {
     config: async (config) => {
+      const key = explicitApiKey(options)
+      const providerOptions = {
+        baseURL: options.baseURL || "https://bharatcode.kaabil.me/v1",
+        timeout: options.timeout ?? 1800000,
+        chunkTimeout: options.chunkTimeout ?? 180000,
+      }
+      if (key) providerOptions.apiKey = key
+
       config.model = options.model || MODEL
       config.small_model = options.small_model || MODEL
 
@@ -48,12 +56,7 @@ export const BharatCodePlugin = async (_ctx, options = {}) => {
       config.provider[PROVIDER_ID] = {
         npm: "@ai-sdk/openai-compatible",
         name: "BharatCode A100 llama.cpp",
-        options: {
-          baseURL: options.baseURL || "https://bharatcode.kaabil.me/v1",
-          apiKey: apiKey(options),
-          timeout: options.timeout ?? 1800000,
-          chunkTimeout: options.chunkTimeout ?? 180000,
-        },
+        options: providerOptions,
         models: {
           [MODEL_ID]: {
             name: "BharatCode Qwen3.6 35B-A3B Q6_K 256K Vision Thinking",

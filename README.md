@@ -1,151 +1,103 @@
-# bharatcode
+# BharatCode OpenCode Setup
 
-OpenCode plugin for the BharatCode A100 coding model endpoint.
+## Windows Setup
 
-This configures OpenCode to use:
+1. Install Node.js LTS from https://nodejs.org/
 
-- endpoint: `https://bharatcode.kaabil.me/v1`
-- model: `bharatcode:qwen36-35b-q6-256k-vision`
-- context window: `256K`
-- image input: enabled
-- reasoning: enabled
-- provider adapter: `@ai-sdk/openai-compatible`
+2. Open PowerShell.
 
-You need a BharatCode API key from Shrey. Do not commit or share the key.
+3. Install OpenCode:
 
-## Install
-
-Install OpenCode:
-
-```bash
+```powershell
 npm install -g opencode-ai
-opencode --version
 ```
 
-Configure the plugin in `~/.config/opencode/opencode.json`:
+4. Create the OpenCode config:
 
-```json
+```powershell
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.config\opencode" | Out-Null
+@'
 {
   "$schema": "https://opencode.ai/config.json",
   "plugin": ["bharatcode"]
 }
+'@ | Set-Content -Encoding UTF8 "$env:USERPROFILE\.config\opencode\opencode.json"
 ```
 
-Set your API key:
-
-```bash
-export BHARATCODE_API_KEY="PASTE_YOUR_KEY_HERE"
-```
-
-To persist it, add that line to your shell profile, such as `~/.bashrc` or
-`~/.zshrc`.
-
-On Windows PowerShell:
+5. Start OpenCode:
 
 ```powershell
-setx BHARATCODE_API_KEY "PASTE_YOUR_KEY_HERE"
+opencode
 ```
 
-Open a new terminal after running `setx`.
+6. Inside OpenCode, type:
 
-## Smoke Test
-
-```bash
-opencode run "Return only the integer result of 23*19."
+```text
+/connect
 ```
 
-Expected output:
+7. Choose `Other`.
+
+8. When it asks for provider id, type:
+
+```text
+bharatcode
+```
+
+9. Paste your BharatCode API key.
+
+10. Test it:
+
+```text
+Return only the integer result of 23*19.
+```
+
+The answer should be:
 
 ```text
 437
 ```
 
-Then use it inside a repository:
+11. To use it in a project:
 
-```bash
-cd /path/to/your/repo
+```powershell
+cd path\to\your\repo
 opencode
 ```
 
-## Local Plugin Fallback
+## Linux/macOS Setup
 
-If the npm package install path is not working on your machine, install the
-plugin file directly.
+1. Install Node.js LTS from https://nodejs.org/
 
-Linux/macOS:
+2. Install OpenCode:
 
 ```bash
-mkdir -p ~/.config/opencode/plugins
-curl -L https://raw.githubusercontent.com/shrey16/bharatcode/main/index.js \
-  -o ~/.config/opencode/plugins/bharatcode-plugin.js
+npm install -g opencode-ai
 ```
 
-Windows PowerShell:
+3. Create the OpenCode config:
 
-```powershell
-New-Item -ItemType Directory -Force "$env:USERPROFILE\.config\opencode\plugins"
-Invoke-WebRequest `
-  -Uri "https://raw.githubusercontent.com/shrey16/bharatcode/main/index.js" `
-  -OutFile "$env:USERPROFILE\.config\opencode\plugins\bharatcode-plugin.js"
-```
-
-When using the local plugin fallback, you do not need the `"plugin"` entry in
-`opencode.json`; OpenCode auto-loads local plugin files from the plugins
-directory.
-
-## Optional Plugin Options
-
-You can pass options from `opencode.json`:
-
-```json
+```bash
+mkdir -p ~/.config/opencode
+cat > ~/.config/opencode/opencode.json <<'JSON'
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": [
-    [
-      "bharatcode",
-      {
-        "apiKey": "{env:BHARATCODE_API_KEY}",
-        "steps": 16,
-        "smallSteps": 3,
-        "output": 32768
-      }
-    ]
-  ]
+  "plugin": ["bharatcode"]
 }
+JSON
 ```
 
-The plugin also reads these environment variables:
-
-- `BHARATCODE_API_KEY`
-- `OPENCODE_BHARATCODE_API_KEY`
-
-## Usage Notes
-
-- The shared server currently runs one active inference slot.
-- If someone else is using it, your request may queue.
-- The older `bharatcode:qwen36-35b-q8-256k` model id remains accepted for
-  compatibility with earlier plugin installs.
-- First response on a large repository can be slow because the prompt has to be
-  prefetched.
-- Follow-up turns in the same session are faster because prompt/KV caching is
-  enabled.
-- Do not paste secrets, private keys, production credentials, or customer data
-  into the model.
-
-## Development
-
-Run a local plugin smoke test:
+4. Start OpenCode:
 
 ```bash
-tmp="$(mktemp -d)"
-mkdir -p "$tmp/.config/opencode/plugins"
-cp index.js "$tmp/.config/opencode/plugins/bharatcode-plugin.js"
-HOME="$tmp" BHARATCODE_API_KEY="$BHARATCODE_API_KEY" \
-  opencode run "Return only the integer result of 23*19."
+opencode
 ```
 
-Package check:
+5. Inside OpenCode, run `/connect`, choose `Other`, enter provider id
+   `bharatcode`, and paste your BharatCode API key.
 
-```bash
-npm pack --dry-run
+6. Test it:
+
+```text
+Return only the integer result of 23*19.
 ```

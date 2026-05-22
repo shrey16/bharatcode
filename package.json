@@ -1,6 +1,6 @@
 {
   "name": "bharatcode",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "OpenCode plugin for the BharatCode Qwen3.6 A100 vision endpoint.",
   "type": "module",
   "main": "index.js",
